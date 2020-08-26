@@ -10,6 +10,13 @@
     "@redwoodjs/web": "^0.16.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "tailwindcss": "^1.7.3"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.3.0",
+    "autoprefixer": "^9.8.6",
+    "postcss-loader": "^3.0.0",
+    "tailwindcss": "^1.7.3"
   }
 }

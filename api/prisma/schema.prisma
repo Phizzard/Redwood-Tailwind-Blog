@@ -6,7 +6,7 @@ datasource DS {
 }
 
 generator client {
-  provider      = "prisma-client-js"
+  provider      = ["sqlite", "postgresql"]
   binaryTargets = "native"
 }
 

@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Link, routes } from '@redwoodjs/router'
+import { useAuth } from '@redwoodjs/auth'
 
 const BlogLayout = ({ children }) => {
+  const { logIn, logOut, isAuthenticated, currentUser } = useAuth()
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   return (
@@ -61,15 +63,39 @@ const BlogLayout = ({ children }) => {
                 >
                   About
                 </Link>
-              </div>
-              <div className="hidden md:block md:ml-10 md:pr-4">
                 <Link
                   to={routes.contact()}
-                  className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+                  className="ml-8 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
                 >
                   Contact
                 </Link>
+                <a
+                  href="#"
+                  onClick={isAuthenticated ? logOut : logIn}
+                  className="ml-8 font-medium text-pink-600 hover:text-pink-700 transition duration-150 ease-in-out"
+                >
+                  {isAuthenticated ? 'Log Out' : 'Log In'}
+                </a>
               </div>
+              {isAuthenticated && (
+                <div className="hidden md:block md:ml-10 md:pr-4">
+                  <div className="flex items-center">
+                    <img
+                      className="w-10 h-10 rounded-full mr-4"
+                      src="https://www.gravatar.com/avatar?f=y&d=retro"
+                      alt="Avatar of Jonathan Reinink"
+                    />
+                    <div className="text-sm">
+                      <p className="text-gray-600 leading-none">
+                        Logged in as:
+                      </p>
+                      <p className="text-pink-600 font-bold leading-none mt-1">
+                        {currentUser.email}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </nav>
           </div>
           {/*<!--
@@ -130,15 +156,23 @@ const BlogLayout = ({ children }) => {
                     >
                       About
                     </Link>
-                  </div>
-                  <div className="px-2 pt-2 pb-3">
                     <Link
                       to={routes.contact()}
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                      className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
                       role="menuitem"
                     >
                       Contact
                     </Link>
+                  </div>
+                  <div>
+                    <a
+                      href="#"
+                      className="block w-full px-5 py-3 text-center font-medium text-pink-600  bg-gray-50 hover:bg-gray-100 hover:text-pink-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out"
+                      role="menuitem"
+                      onClick={logIn}
+                    >
+                      Log in
+                    </a>
                   </div>
                 </div>
               </div>

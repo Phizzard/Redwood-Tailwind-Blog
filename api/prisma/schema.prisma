@@ -6,7 +6,7 @@ datasource DS {
 }
 
 generator client {
-  provider      = ["sqlite", "postgresql"]
+  provider      = "postgresql"
   binaryTargets = "native"
 }
 
